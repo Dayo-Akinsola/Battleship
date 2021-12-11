@@ -9,6 +9,15 @@ const Ship = (length, shipCoordinates) => {
     shipHits[shipCoordinates[i]] = false;
   }
 
+  const shipNames = {
+    2: 'Destroyer',
+    3: 'Cruiser',
+    4: 'Battleship',
+    5: 'Carrier',
+  }
+
+  const getShipName = () => shipNames[length];
+
   const hasCoordinates = (attackCoordinates) => {
     let matchFound = false;
     shipCoordinates.forEach((coordinates) => {
@@ -27,13 +36,15 @@ const Ship = (length, shipCoordinates) => {
 
   const isSunk = () => {
     const shipHitBools = Object.values(shipHits);
-    return shipHitBools.every((bool) => bool);
+    return shipHitBools.every((bool) => bool === true);
   }
 
   return {
+    getShipName,
     hit,
     isSunk,
     hasCoordinates,
+    shipCoordinates,
   }
 };
 
