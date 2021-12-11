@@ -1,0 +1,43 @@
+.grids-section {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-150%, -100%);
+  max-width: 6.5em;
+  height: 13.3em;
+
+  .ships-grid {
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    margin-top: 2em;
+    margin-bottom: 4em;
+  }
+
+  .grid-square {
+    height: 1.8em;
+    width: 1.8em;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.1em;
+    cursor: pointer;
+  }
+
+  .grid-square.missed {
+    background-color: aquamarine;
+  }
+
+  .grid-square.hit {
+    background-color: crimson;
+  }
+
+  .grid-square.ship-placed {
+    background-color: grey;
+  }
+
+  .grid-square.ship-placed.hit {
+    background-color: crimson;
+  }
+}

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.4.3",
     "prettier": "2.5.1",
+    "sass": "^1.44.0",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.65.0",
