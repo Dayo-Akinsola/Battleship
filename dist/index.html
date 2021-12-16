@@ -8,7 +8,7 @@
     <title>Battleship</title>
   </head>
   <body>
-    <script defer src="main.js"></script>
+    <script src="main.js"></script>
     <h1 class="page-heading">Battleship</h1>
     <div class="game-reset-container">
       <button class="game-reset-btn">Reset Game</button>
@@ -95,67 +95,69 @@
             <button class="placement-btn random-btn">Random</button>
             <button class="placement-btn reset-btn">Reset</button>
           </div>
-          <div class="grid-wrapper placement-grid-wrapper"></div>
-          <div class="ships-display-container">
-            <div class="display-container carrier-display-container">
-              <span class="ship-display-name">Carrier <span class="display-count" data-display-count="1">&#215;1</span></span>
-              <div class="ship-display carrier-display" draggable="true">
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-              </div>
-            </div>
-            <div class="display-container battleship-display-container">
-              <span class="ship-display-name">Battleship <span class="display-count" data-display-count="2">&#215;2</span></span>
-              <div class="ship-display battleship-display" draggable="true">
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
+          <div class="placement-section">
+            <div class="grid-wrapper placement-grid-wrapper"></div>
+            <div class="ships-display-container">
+              <div class="display-container carrier-display-container">
+                <span class="ship-display-name">Carrier <span class="display-count" data-display-count="1">&#215;1</span></span>
+                <div class="ship-display carrier-display" draggable="true">
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="display-container cruiser-display-container">
-              <span class="ship-display-name">Cruiser <span class="display-count" data-display-count="3">&#215;3</span></span>
-              <div class="ship-display cruiser-display" draggable="true">
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
-                </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
+              <div class="display-container battleship-display-container">
+                <span class="ship-display-name">Battleship <span class="display-count" data-display-count="2">&#215;2</span></span>
+                <div class="ship-display battleship-display" draggable="true">
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="display-container destroyer-display-container">
-              <span class="ship-display-name">Destroyer <span class="display-count" data-display-count="4">&#215;4</span></span>
-              <div class="ship-display destroyer-display" draggable="true">
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
+              <div class="display-container cruiser-display-container">
+                <span class="ship-display-name">Cruiser <span class="display-count" data-display-count="3">&#215;3</span></span>
+                <div class="ship-display cruiser-display" draggable="true">
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
                 </div>
-                <div class="grid-square player-square placed-ship-display">
-                  <div class="ship-circle"></div>
+              </div>
+              <div class="display-container destroyer-display-container">
+                <span class="ship-display-name">Destroyer <span class="display-count" data-display-count="4">&#215;4</span></span>
+                <div class="ship-display destroyer-display" draggable="true">
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
+                  <div class="grid-square player-square placed-ship-display">
+                    <div class="ship-circle"></div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,4 +1,6 @@
 import './style.scss';
 import { gameStart } from './gameControl';
 
-gameStart();
+setTimeout(() => {
+  gameStart();
+}, 100);
