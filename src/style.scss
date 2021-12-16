@@ -38,6 +38,16 @@
   min-width: 50%;
 }
 
+@mixin btn {
+  cursor: pointer;
+  border-style: none;
+  padding: 0.6em;
+  font-size: 1em;
+  width: 100%;
+  font-weight: 600;
+  border-radius: 22px;
+}
+
 body {
   font-family: "Black Ops One", cursive;
 }
@@ -45,6 +55,18 @@ body {
 .page-heading {
 	text-align: center;
 	font-size: 3.2rem;
+}
+
+.game-reset-container {
+  display: flex;
+  justify-content: center;
+}
+
+.game-reset-btn {
+  @include btn;
+  width: 50%;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 
@@ -73,7 +95,6 @@ body {
     @include mainSection();
   }
   
-
   .player-section-heading-container {
     @include headingContainer();
     background-color: #457B9D;
@@ -84,7 +105,7 @@ body {
     background-color: #E63946;
   }
 
-  .ship-count {
+  .ship-counts {
     display: flex;
     justify-content: space-around;
   }
@@ -111,6 +132,49 @@ body {
     flex-direction: column;
     align-items: center;
   }
+
+  .game-status {
+    margin-bottom: 2em;
+    border: 4px solid black;
+    background-color: #457b9d;
+    padding: 0.5em;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+  }
+
+  .game-status-message {
+    opacity: 0;
+    display: none;
+  }
+
+  .game-status-message.shown {
+    display: block;
+    opacity: 1;
+    animation-name: reveal;
+    animation-duration: 1s;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .play-again-btn-container {
+    display: none;
+  }
+
+  .play-again-btn {
+    @include btn();
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    border-style: solid;
+    padding: 0.8em;
+  }
 }
 
 .grid-wrapper {
@@ -128,7 +192,7 @@ body {
   }
 
   .grid-square:hover {
-    background-color: #F1FAEE;
+    background-color: #D6ECE5;
   }
 
   .missed-circle {
@@ -160,6 +224,20 @@ body {
     margin-top: 2em;
     max-width: 80%;
     margin: auto;
+    padding: 1em;
+    border-radius: 8px;
+  }
+
+  .info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+    margin-top: 0.8em;
+  }
+
+  .rotate-info {
+    text-align: center;
   }
 
   .ship-placement-heading {
@@ -172,24 +250,46 @@ body {
     padding-bottom: 0.1em;
   }
 
-  .ships-display-container {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
   .display-container {
     max-width: 100%;
     text-align: center;
   }
 
+  .placed-ship-display {
+    @include square;
+    background-color: rgba(128, 128, 128, 0.329);
+    border-radius: 2px;
+    width: 0%;
+    min-width: 6%;
+    padding-bottom: 6%;
+  }
+
   .ship-display {
     display: flex;
     padding-bottom: 1em;
+    justify-content: center;
   }
 
-  .grid-square.ship-placed {
-    width: 0%;
-    min-width: 18%;
-    padding-bottom: 18%;
+  .placement-grid {
+    margin-bottom: 2em;
+  }
+
+  .placement-btns-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .placement-btn {
+    @include btn();
+  }
+
+  .random-btn {
+    margin: 0 0.4em;
+  }
+
+  .grid-square.placement-square.ship-placed {
+    @include square;
+    background-color: rgba(128, 128, 128, 0.329);
+    border-radius: 2px;
   }
 }
