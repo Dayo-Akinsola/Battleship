@@ -32,6 +32,8 @@
   font-size: 1em;
   color: white;
   max-width: 100%;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 2px 4px 13px 6px rgba(151,151,151,0); 
+  box-shadow: 0px 10px 13px -7px #000000, 2px 4px 13px 6px rgba(151,151,151,0);
 }
 
 @mixin mainSection {
@@ -55,6 +57,7 @@ body {
 .page-heading {
 	text-align: center;
 	font-size: 3.2rem;
+  margin-top: 0.5em;
 }
 
 .game-reset-container {
@@ -141,6 +144,7 @@ body {
     width: 100%;
     text-align: center;
     font-size: 1.1em;
+    color: white;
   }
 
   .game-status-message {
@@ -175,6 +179,61 @@ body {
     border-style: solid;
     padding: 0.8em;
   }
+
+  @media (min-width: 650px) {
+
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 6em;
+
+    .game-status {
+      position: absolute;
+      top: 10.3em;
+    }
+
+    .player-section {
+      min-width: 45%;
+    }
+
+    .opponent-section {
+      min-width: 45%;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .player-section {
+      min-width: 30%;
+    }
+
+    .opponent-section {
+      min-width: 30%;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .ship-circle {
+      margin-top: 0.5em;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .player-section {
+      min-width: 25%;
+    }
+
+    .opponent-section {
+      min-width: 25%;
+    }
+
+    .game-status {
+      font-size: 1.3em;
+      top: 8.3em;
+    }
+
+    .play-again-btn {
+      font-size: 1.5em;
+    }
+  }
 }
 
 .grid-wrapper {
@@ -185,6 +244,7 @@ body {
     grid-template-columns: repeat(10, 1fr);
     margin-top: 2em;
     margin-bottom: 4em;
+    
   }
 
   .grid-square {
@@ -203,6 +263,16 @@ body {
   .hit-circle {
     @include circle();
     background-color: #E63946;
+  }
+
+  @media (min-width: 1400px) {
+    .missed-circle {
+      margin-top: 0.5em;
+    }
+
+    .hit-circle {
+      margin-top: 0.5em;
+    }
   }
 }
 
@@ -226,6 +296,8 @@ body {
     margin: auto;
     padding: 1em;
     border-radius: 8px;
+    -webkit-box-shadow: -10px 0px 13px -7px #ffffff8a, 10px 0px 13px -7px #ffffff8a, 2px 4px 13px 6px rgba(151,151,151,0); 
+    box-shadow: 0px 13px -7px #ffffff5e, 10px 0px 13px -7px #ffffff77, 2px 4px 13px 6px rgba(151, 151, 151, 0);
   }
 
   .info-wrapper {
@@ -264,6 +336,10 @@ body {
     padding-bottom: 6%;
   }
 
+  .ship-circle {
+    margin-top: 0.3em;
+  }
+
   .ship-display {
     display: flex;
     padding-bottom: 1em;
@@ -291,5 +367,44 @@ body {
     @include square;
     background-color: rgba(128, 128, 128, 0.329);
     border-radius: 2px;
+  }
+
+  @media (min-width: 800px) {
+    .placement-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .placement-grid-wrapper {
+      min-width: 47%;
+    }
+
+    .ships-display-container {
+      min-width: 45%;
+    }
+
+    .placed-ship-display {
+      min-width: 10%;
+      padding-bottom: 10%;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .ship-circle {
+      margin-top: 0.5em;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .ship-placement-container {
+      max-width: 65%;
+      margin-top: 7em;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .ship-placement-container {
+      max-width: 55%;
+    }
   }
 }
