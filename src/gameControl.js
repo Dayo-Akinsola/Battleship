@@ -1,6 +1,7 @@
 import GameBoard from './gameBoard';
 import { Player, ComputerPlayer } from './player';
-import PageEvents from './userInterface/pageEvents';
+import GameEvents from './userInterface/gameEvents';
+import PlacementEvents from './userInterface/placementEvents';
 import renderGrids  from './userInterface/renderUI';
 
 const gameStart = () => {
@@ -9,10 +10,9 @@ const gameStart = () => {
   const computerPlayer = ComputerPlayer();
   const computerBoard = GameBoard();
 
-  humanBoard.populateBoard();
-  computerBoard.populateBoard();
   renderGrids(humanBoard.getAllCoordinates());
-  PageEvents.pageListeners(humanPlayer, humanBoard, computerPlayer, computerBoard);
+  GameEvents.pageListeners(humanPlayer, humanBoard, computerPlayer, computerBoard);
+  PlacementEvents.placementListeners(humanBoard, humanPlayer, computerBoard);
 
   return {
     humanPlayer,
