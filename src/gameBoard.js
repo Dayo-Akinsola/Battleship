@@ -7,27 +7,13 @@ const GameBoard = () => {
   const boardWidth = 10;
   const boardHeight = 10;
 
-  /* Checks the coordinates of placed ships to see if the parameter coordinates match */
-  const isPositionOccupied = (coordinates) => {
-    let placedShipCoordinates = placedShips.map((ship) => ship.shipCoordinates);
-    placedShipCoordinates = [].concat(...placedShipCoordinates);
-    let matchFound = false;
-    placedShipCoordinates.forEach((shipCoordinates) => {
-      if (shipCoordinates[0] === coordinates[0] && shipCoordinates[1] === coordinates[1]) {
-        matchFound = true;
-      }
-    });
-
-    return matchFound;
-  }
-
   /* 
-    Checks if the coordinates of a ship about to be placed is next to the coordinates
+    Checks if the coordinates of a ship about to be placed is next to or on the coordinates
     of a ship that is already on the board.
   */
-  const isAdjacent = (coordinates) => {
-    let placedShipCoordinates = placedShips.map((ship) => ship.shipCoordinates);
-    placedShipCoordinates = [].concat(...placedShipCoordinates);
+  const isAdjacent = (coordinates, ships) => {
+    let allShipCoordinates = ships.map((ship) => ship.getShipCoordinates());
+    allShipCoordinates = [].concat(...allShipCoordinates);
     const checkX = (shipXCoordinate) => {
       if (
         shipXCoordinate === coordinates[0] || 
@@ -49,34 +35,49 @@ const GameBoard = () => {
       return false;
     }
 
-    const nonAdjacentCoordinates = placedShipCoordinates.filter((shipCoordinates) => {
+    const nonAdjacentCoordinates = allShipCoordinates.filter((shipCoordinates) => {
       if (!checkX(shipCoordinates[0]) || !checkY(shipCoordinates[1])) {
         return true;
       }
       return false;
     });
 
-    if (nonAdjacentCoordinates.length === placedShipCoordinates.length) {
+    if (nonAdjacentCoordinates.length === allShipCoordinates.length) {
       return false;
     }
 
     return true;
   }
 
+  const rotationChoice = () => {
+    const choices = [true, false];
+    const randomIndex = Math.floor(Math.random() * 2);
+    return choices[randomIndex];
+  }
+
   /* 
     Places a ship on the board after checking that the ship's coordinates are within the board 
     and that another ship is not already at the coordinates the new ship wants to occupy 
   */
-  const placeShip = (length, startCoordinates) => {
+  const isPositionAvailiable = (length, startCoordinates, rotation, ships) => {
     const shipCoordinates = [];
     for (let i = 0; i < length; i += 1) {
-      if (startCoordinates[0] + i >= boardWidth || startCoordinates[1] >= boardHeight) {
-        return false;
+      if (rotation) {
+        /* If ship is horizontal */
+        if (startCoordinates[0] + i >= boardWidth || startCoordinates[1] >= boardHeight) {
+          return false;
+        }
+        shipCoordinates.push([startCoordinates[0] + i, startCoordinates[1]]);
+      } else {
+        /* If ship is vertical */
+        if (startCoordinates[0] >= boardWidth || startCoordinates[1] + i >= boardHeight) {
+          return false;
+        }
+        shipCoordinates.push([startCoordinates[0], startCoordinates[1] + i]);
       }
-      shipCoordinates.push([startCoordinates[0] + i, startCoordinates[1]]);
     }
     const availiableCoordinates = shipCoordinates.filter((coordinates) => {
-      if (isPositionOccupied(coordinates) || isAdjacent(coordinates)) {
+      if (isAdjacent(coordinates, ships)) {
         return false;
       }
       return true;
@@ -85,10 +86,17 @@ const GameBoard = () => {
     if (availiableCoordinates.length !== length) {
       return false;
     }
-    
-    const ship = new Ship(length, shipCoordinates);
-    placedShips.push(ship);
-    return true;
+    return shipCoordinates;
+  }
+
+  const placeShip = (length, startCoordinates, rotation) => {
+    const shipCoordinates = isPositionAvailiable(length, startCoordinates, rotation, placedShips);
+    if (shipCoordinates) {
+      const ship = new Ship(length, startCoordinates, shipCoordinates);
+      placedShips.push(ship);
+      return true;
+    } 
+    return false;
   }
 
   const receiveAttack = (attackCoordinates) => {
@@ -116,7 +124,7 @@ const GameBoard = () => {
   } 
 
   const getAllCoordinates = () => {
-    const allCoordinates = placedShips.map((ship) =>  ship.shipCoordinates);
+    const allCoordinates = placedShips.map((ship) =>  ship.getShipCoordinates());
     return [].concat(...allCoordinates);
   }
 
@@ -134,10 +142,12 @@ const GameBoard = () => {
     clearBoard();
     let shipsPlaced = 0;
     let length = 5;
+    let i = 0;
     while (shipsPlaced < 10) {
       const randomX = Math.floor(Math.random() * 10);
       const randomY = Math.floor(Math.random() * 10);
-      const placedShip = placeShip(length, [randomX, randomY]);
+      const rotation = rotationChoice();
+      const placedShip = placeShip(length, [randomX, randomY], rotation);
       if (placedShip) {
         shipsPlaced += 1;
       }
@@ -155,9 +165,55 @@ const GameBoard = () => {
         default:
           break;
       }
+
+      i += 1;
+      /*
+        There are some cases where it is impossible to place another ship due to the board layout resulting
+        in a infinite loop. i is here to detect an infinite loop and reset the board and try again when one
+        happens.
+      */
+      if ( i === 1000) {
+        clearBoard();
+        shipsPlaced = 0;
+        length = 5;
+        i = 0;
+      }
     }
   }
 
+  const getLastCreatedShip = () => {
+    const lastShip = placedShips[placedShips.length - 1];
+    return lastShip;
+  }
+
+  const sunkShipCheck = () => {
+    const sunkShip = placedShips.filter((ship) => ship.isSunk());
+    if (sunkShip.length === 0) {
+      return false;
+    }
+    return sunkShip;
+  }
+
+  const removeSunkShip = () => {
+    const sunkShip = sunkShipCheck();
+    if (!sunkShip) {
+      return false;
+    }
+    const sunkShipIndex = placedShips.indexOf(sunkShip[0]);
+    const removedShip = placedShips.splice(sunkShipIndex, 1);
+    sunkShip[0] = null;
+    return removedShip[0];
+  }
+
+  const copyPlacedShips = () => {
+    const copy = [];
+    placedShips.forEach((ship) => {
+      copy.push(ship);
+    });
+    return copy;
+  }
+
+  const isBoardComplete = () => placedShips.length === 10;
 
   return {
     placeShip,
@@ -166,9 +222,13 @@ const GameBoard = () => {
     isPositionFreeToAttack,
     getAllCoordinates,
     clearBoard,
-    isPositionOccupied,
     populateBoard,
-    isAdjacent,
+    sunkShipCheck,
+    removeSunkShip,
+    getLastCreatedShip,
+    isPositionAvailiable,
+    copyPlacedShips,
+    isBoardComplete,
   }
 }
 
