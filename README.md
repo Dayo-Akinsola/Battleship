@@ -1,5 +1,7 @@
 # Battleship
 
+[Live Site](https://dayo-akinsola.github.io/Battleship/)
+
 A program I made based on the game Battleship where you play against the computer to see who can sink their opponent's ships faster.
 
 For this project I took a TDD approach using Jest. Ultimately, this approach was beneficial since it helpd me to create functions with a clear single purpose and have confidence in the correctness of the game logic without relying on the UI.
