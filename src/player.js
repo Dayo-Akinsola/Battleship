@@ -35,6 +35,11 @@ const ComputerPlayer = () => {
   ];
   let index = 0;
 
+  const resetAttackPattern = () => {
+    successfulAttacks.splice(0);
+    index = 0;
+  }
+
   const attackEnemyBoard = (enemyGameBoard, attackCoordinates) => {
     const shipAttacked = enemyGameBoard.receiveAttack(attackCoordinates);
     if (shipAttacked) {
@@ -47,8 +52,7 @@ const ComputerPlayer = () => {
     }
 
     if (enemyGameBoard.sunkShipCheck()) {
-      successfulAttacks.splice(0);
-      index = 0;
+      resetAttackPattern();
     }
 
     return shipAttacked;
@@ -101,6 +105,7 @@ const ComputerPlayer = () => {
   return {
     attackEnemyBoard,
     pickCoordinates,
+    resetAttackPattern,
   }
 }
 

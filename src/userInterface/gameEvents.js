@@ -96,6 +96,7 @@ const GameEvents = (() => {
     const resetGame = () => {
       playerGameBoard.clearBoard();
       enemyGameBoard.clearBoard();
+      enemy.resetAttackPattern();
       removeClassName('missed');
       removeClassName('hit');
       removeClassName('ship-placed');
